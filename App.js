@@ -1,45 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import styled from 'react-native-styled-components';
+import Slick from 'react-native-slick';
+
+
+import HeaderComponent from './components/Header';
+import TaskListComponent from './components/TaskList';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-      <Text style={styles.mainPurpose}>
-        Year Purpose - Study English 
-      </Text>
-      </View>
-      <View style={styles.taskList}>
-      </View>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+     <Slick  showsPagination={false}	loop={false}>
+        <PageOne >
+          <HeaderComponent />
+          <TaskListComponent />
+          <StatusBar style="auto" />
+        </PageOne>
+        <PageTwo>
+          <PageTwoTitle>Purposes</PageTwoTitle>
+        </PageTwo>
+      </Slick>
+   )};
 
-const styles = StyleSheet.create({
- 
-  container: {
+const PageOne = styled(View,{
     flex: 1,
-  },
-   header: {
-    width: '100%',
-    height: '50%',
-    backgroundColor: '#839',
-  },
-  mainPurpose: {
-    marginTop: 30,
+});
+const PageTwo = styled(View,{
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+});
+const PageTwoTitle = styled(Text,{
+    padding: 25,
+    color: '#fff',
+    fontSize: 30,
     fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'white',
-  },
-  taskList: {
-    position: 'absolute',
-    top: '35%',
-    height: '100%',
-    width: '100%',
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    backgroundColor: 'white',
-  },
 });
