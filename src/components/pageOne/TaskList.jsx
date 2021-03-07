@@ -18,8 +18,6 @@ export default function TaskListComponent() {
   border-radius: 40px;
   background: white;
  `;
-   
- 
  const Title = styled.Text`
   color: #000;
   font-size: 24px;

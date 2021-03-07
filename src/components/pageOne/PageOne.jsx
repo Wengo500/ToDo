@@ -5,15 +5,15 @@ import styled from 'styled-components/native';
 import HeaderComponent from './Header';
 import TaskListComponent from './TaskList';
 
-export default function PageOneComponent() {
+export default function PageOne() {
   return (
-      <PageOne>
+      <PageOneEl>
          <HeaderComponent />
          <TaskListComponent />
-      </PageOne>
+      </PageOneEl>
   );
 }
 
-const PageOne = styled.View`
+const PageOneEl = styled.View`
  flex: 1;
 `;

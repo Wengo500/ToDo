@@ -1,36 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {StyleSheet, Text, View } from 'react-native';
-import styled from 'styled-components/native';
 import Slick from 'react-native-slick';
+import store from './src/redux/store';
+import {Provider} from 'react-redux';
 
-import PageOneComponent from './components/pageOne/PageOne';
+
+import PageOne from './src/components/pageOne/PageOne';
+import PageTwo from './src/components/pageTwo/PageTwo';
 
 export default function App() {
-  return (
-     <Slick  showsPagination={false}	loop={false}>
-        <PageOneComponent />
-         
-          <StatusBar style="auto" />
-        
-        <PageTwo>
-          <PageTwoTitle>Purposes</PageTwoTitle>
-        </PageTwo>
 
+  return (
+    <Provider store={store}>
+     <Slick showsPagination={false}	loop={false} >
+       
+        <PageOne />
+        <PageTwo />
+        
       </Slick>
+      </Provider>
    )};
 
 
-const PageTwo = styled.View`
- flex: 1;
- align-items: center;
- background-color: #97CAE5;  
-`;
-const PageTwoTitle = styled.Text`
-  padding: 25px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-`;
+
     
 

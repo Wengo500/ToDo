@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View } from 'react-native';
 import styled from 'styled-components/native';
+import HeaderCounter from './HeaderCounter';
+import StartDate from './StartDate'
 
 import {LinearGradient} from 'expo-linear-gradient';
 
-import HeaderCounter from './HeaderCounter';
 
 export default function HeaderComponent() {
   return (
@@ -15,7 +16,9 @@ export default function HeaderComponent() {
          end={{x: 0.3, y: 1}} 
          colors={[ '#6e27b0', '#341272']} >
           <MainPurpose >Year Purpose - Study English </MainPurpose>
+          <StartDate />
           <HeaderCounter />
+          <FinishDate>Finish</FinishDate>
         </LinearGradient>
       </Header>
   );
@@ -23,12 +26,20 @@ export default function HeaderComponent() {
 const Header = styled.View`
     
 `;
+
+const FinishDate = styled.Text`
+  position: absolute;
+  top: 30%;
+  right: 0;
+  color: white;
+  margin: 0 50px
+`;
 const MainPurpose = styled.Text`
   margin-top: 10%;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
 `;
   
 const styles = StyleSheet.create({
