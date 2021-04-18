@@ -1,23 +1,23 @@
 import React from 'react';
-import Slick from 'react-native-slick';
+
 import store from './src/redux/store';
 import {Provider} from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import { ConfirmProvider } from 'react-native-confirm-dialog'
 
-
-import PageOne from './src/components/pageOne/PageOne';
-import PageTwo from './src/components/pageTwo/PageTwo';
+import Navigator from './src/navigation/Navigator'
 
 export default function App() {
 
   return (
     <Provider store={store}>
-     <Slick showsPagination={false}	loop={false} >
-       
-        <PageOne />
-        <PageTwo />
-        
-      </Slick>
-      </Provider>
+      <ConfirmProvider>
+        <NavigationContainer>          
+          <Navigator/>
+        </NavigationContainer>
+      </ConfirmProvider>    
+    </Provider>
    )};
 
 

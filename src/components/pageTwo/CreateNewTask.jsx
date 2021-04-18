@@ -7,9 +7,9 @@ const {width} = Dimensions.get('screen')
 
 export default function CreateNewTask() {
   return (
-      <Card style={{width: width / 2 - 9, height: width / 3}}>
-        <Plus>+</Plus>
-      </Card>
+    <Card style={{width: width / 2 - 9, height: width / 3}}>
+      <Plus>+</Plus>
+    </Card>      
   );
 }
 

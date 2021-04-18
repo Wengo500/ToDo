@@ -1,47 +1,44 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {connect} from 'react-redux';
-
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import TaskCard from './TaskCard';
 import CreateNewTask from './CreateNewTask';
-import CreateTaskWindow from './createTaskWindow/CreateTaskWindow';
-import ChangeWindowState from './ChangeWindowState';
 
-function PageTwo(state) {
 
-  //   const renderPurpose = () => {
-  //   return state.purpose.map(elem => {
-  //     return <TaskCard purposeName={elem.purposeName} key={comment.id} />
-  //   });
-  // };
+function PageTwo({changePageIndex, allPurposes}) {
+  const {navigate} = useNavigation();
   return (
-      <PageTwoEl>
-          
-          <PageTwoTitle>Purposes</PageTwoTitle>
-          <Container>
-            <TaskCard/>
-            {/* {renderPurpose()} */}
-            <ChangeWindowState component={CreateNewTask()}/>
-          </Container>
+    <PageTwoEl>          
+      <PageTwoTitle>Purposes</PageTwoTitle>
+      <Container>   
 
-          <CreateTaskWindow/>
-          
-      </PageTwoEl>
-  );
+        {allPurposes.map(el=> 
+          <TouchableOpacity key={el.id} onPress={()=> changePageIndex(el.id)}>
+            <TaskCard purposeName={el.purposeName}/>
+          </TouchableOpacity>
+          )
+        }
+        <TouchableOpacity onPress={() => {navigate('Create Purpose')}}>
+          <CreateNewTask />
+        </TouchableOpacity>
+
+      </Container>
+    </PageTwoEl>
+  )
 }
 
 
-const PageTwoEl = styled.View`
- flex: 1;
- background-color: #97CAE5;  
- align-items: center;
+const PageTwoEl = styled.ScrollView`
+  background-color: #97CAE5;  
 `;
 const PageTwoTitle = styled.Text`
   padding: 25px 0 10px;
   color: #fff;
   font-size: 40px;
   font-weight: bold;
+  text-align: center;
 `;
 const Container = styled.View`
   flex-direction: row;
@@ -49,12 +46,4 @@ const Container = styled.View`
   padding: 4px;
 `;
 
-
-const mapStateToProps = (state) => {
-  return {
-    purpose: state.purpose
-  }
-}
- 
- 
-export default connect(mapStateToProps)(PageTwo)
+export default PageTwo;

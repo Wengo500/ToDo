@@ -1,18 +1,21 @@
 import { combineReducers, createStore, applyMiddleware} from "redux";
 import logger from 'redux-logger';
+import thunk from "redux-thunk";
 
-import CreateTaskWindowReducer from './CreateTaskWindowReducer';
-import NewPurposesReducer from './CreateTaskWindowReducer';
+import refreshReducer from './refreshReducer';
+import startDateReducer from './startDateReducer';
+import chunkItemsReducer from './chunkItemsReducer';
 
 
 let reducers = combineReducers({
- taskWindow: CreateTaskWindowReducer,
- purposes: NewPurposesReducer
+ refresh: refreshReducer,
+ startDate: startDateReducer,
+ chunks: chunkItemsReducer,
 });
 
 let store = createStore(
   reducers,
-  applyMiddleware(logger)
+  applyMiddleware( thunk )
   );
 
 export default store;

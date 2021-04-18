@@ -2,14 +2,14 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
 
-import HeaderComponent from './Header';
+import HeaderComponent from './header/Header';
 import TaskListComponent from './TaskList';
 
-export default function PageOne() {
+export default function PageOne({selectPurpose}) {
   return (
       <PageOneEl>
-         <HeaderComponent />
-         <TaskListComponent />
+         <HeaderComponent selectPurpose={selectPurpose}/>
+         <TaskListComponent selectPurpose={selectPurpose}/>
       </PageOneEl>
   );
 }
