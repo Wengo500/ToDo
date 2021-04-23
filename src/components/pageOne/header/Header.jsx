@@ -9,7 +9,6 @@ import FinishDate from '../date/FinishDate';
 
 
 export default function HeaderComponent({selectPurpose}) {
-// console.log(selectPurpose)
   return (
       <Header >
         <LinearGradient style={styles.linearGradient}
@@ -20,9 +19,9 @@ export default function HeaderComponent({selectPurpose}) {
         >
           <MainPurpose >{selectPurpose.purposeName}</MainPurpose>
           <ItemsWrapper>
-            <StartDate  date={selectPurpose.chunks} />
-            <HeaderCounter />
-            <FinishDate date={selectPurpose.chunks}/>
+            <StartDate  chunks={selectPurpose.chunks} />
+            <HeaderCounter chunks={selectPurpose.chunks}/>
+            <FinishDate chunks={selectPurpose.chunks}/>
           </ItemsWrapper>       
         </LinearGradient>
       </Header>
@@ -32,7 +31,7 @@ const Header = styled.View`
 `;
 
 const MainPurpose = styled.Text`
-  margin-top: 10%;
+  margin: 10% 0 5%;
   font-size: 24px;
   font-weight: bold;
   text-align: center;

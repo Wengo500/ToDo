@@ -6,10 +6,26 @@ import {LinearGradient} from 'expo-linear-gradient';
 
 const {width} = Dimensions.get('screen')
 
-export default function HeaderCounter() {
+export default function HeaderCounter({chunks}) {
+
+  const findStartDate = () => {
+    const chunk = chunks.find((el, id) => id === 0)     
+    return new Date(chunk.chunkStartDate)
+  }
+ 
+  const findFinishDate = () => {
+   const chunk = chunks.find((el)=> el.chunkId === chunks.length-1)
+    return new Date(chunk.chunkStartDate)
+  }
+  const getDays = () => {
+    let start = new Date(findStartDate())
+    let finish = new Date(findFinishDate())
+    return Math.floor((finish.getTime() - start.getTime())/(1000*60*60*24))+1
+  }
+
   return (
      <Counter style={{width: width / 3, height: width / 3}}>
-          <CounterValue>365</CounterValue>
+        <CounterValue>{chunks === undefined ? null : getDays()}</CounterValue>
      </Counter> 
   );
 }
@@ -19,7 +35,7 @@ const Counter = styled.View `
   align-items: center;
   justify-content: center;
   height: 100px;
-  margin: 5% auto;
+  margin: 0 auto;
   background: black;
   border-radius: 80px;
 `;

@@ -1,19 +1,19 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
-const {height, width} = Dimensions.get('screen')
 
-export default function StartDate({date}) {
+export default function StartDate({chunks}) {
   const findDate = () => {
-    const chunk = date === undefined ? 'select purpose' :
-      date.find((el, id) => id === 0)
-    return chunk.chunkStartDate;
+    const chunk = chunks === undefined ? 'select purpose' :
+      chunks.find((el, id) => id === 0)
+      
+    return new Date(chunk.chunkStartDate).toDateString().slice(0,-4);
   }
 
   return (
       <View style={styles.StartDate}>
         <Text style={styles.dateText}>Start date</Text>
-        <Text style={styles.dateText} >{findDate()}</Text>
+        <Text style={styles.dateText} >{chunks!==undefined?findDate() : null}</Text>
       </View>
   );
 }

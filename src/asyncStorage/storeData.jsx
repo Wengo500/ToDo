@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export const saveStoreData = async (key, purposeName, purposeDescription, chunksArr, id) => {
+export const saveStoreData = async (purposeName, purposeDescription, chunksArr, id) => {
 
   try {
     const storeValue = {     
@@ -14,7 +14,7 @@ export const saveStoreData = async (key, purposeName, purposeDescription, chunks
     }
     
     const saveStore = JSON.stringify(storeValue)
-    await AsyncStorage.setItem(`${key}`, saveStore)
+    await AsyncStorage.setItem(`${id}`, saveStore)
 
   } catch (error) {
     console.log('while saving the file something went wrong', error)
@@ -30,6 +30,6 @@ export const getStoreData = (key)=>{
     } catch(error) {
       console.log('while reading the file something went wrong', error)
     }
-  })().then(res=> res)
+  })()
 }
 // AsyncStorage.clear()

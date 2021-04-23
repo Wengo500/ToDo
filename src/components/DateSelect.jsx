@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
 import {View, Button, Platform} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { useDispatch, useSelector } from 'react-redux';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
-import getStartDate from '../redux/thunk/dataThunk';
 
-function DateSelect() {
-  const stateDate = useSelector(state=> state.startDate.date)
-  const dispatch = useDispatch()
-  const [date, setDate] = useState(new Date());
+function DateSelect({newDate}) {
+  const [date, setDate] = useState('Select start date');
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   
@@ -16,7 +12,7 @@ function DateSelect() {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
-    dispatch(getStartDate(currentDate))
+    newDate(currentDate);
   };
 
   const showMode = (currentMode) => {
@@ -32,16 +28,22 @@ function DateSelect() {
   return (          
     <View style={{width: '100%', marginBottom: 10}}>
       <View>
-        <Button onPress={showDatepicker} title={`${stateDate}`} />
+        <Button 
+          onPress={showDatepicker}
+          title={date !== 'Select start date'?
+            date.toDateString().slice(0,-4) : date
+          } 
+        />
       </View>
       {show && (
-        <DateTimePicker
+        <RNDateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={date==='Select start date'? new Date() :date}
           mode={mode}
           is24Hour={true}
           display="default"
           onChange={onChange}
+          minimumDate={new Date()}
         />
       )}
     </View>

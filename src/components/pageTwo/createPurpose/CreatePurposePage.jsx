@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect}  from 'react';
 import { StyleSheet, Button, TextInput, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,21 +7,18 @@ import { useConfirm } from 'react-native-confirm-dialog';
 
 import PurposeChunk from './PurposeChunk';
 import {saveStoreData} from '../../../asyncStorage/storeData';
-
 import {refreshActionCreator} from '../../../redux/refreshReducer';
 
 
 function CreatePurposePage({navigation}) {
-  // const key = (i=0) => i++
-  const id = Math.random()
-  const key = Math.random()
-  const state = useSelector(state=> state)
+  const chunks = useSelector(state=> state.chunks)
   const dispatch = useDispatch()
   const confirm = useConfirm()
- 
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputDescriptionValue, setInputDescriptionValue] = useState('')
   const [chunkComponentArr, setChunkComponentArr] = useState([])
+  const id = Math.random()
+
 
   const getNewChunk = () => setChunkComponentArr(oldArr => [...oldArr, <PurposeChunk/>])
 
@@ -48,6 +45,20 @@ function CreatePurposePage({navigation}) {
             </TouchableOpacity>
   });
 
+  const chunkChecker =()=>{
+    if(chunkComponentArr.length < 3) alert('Сreate at least 3 chunks')
+    else if(chunks.some(
+        el => el.chunkStartDate === "" || 
+        el.chunkName === "" || 
+        el.chunkDescription === "")) alert("Empty input or date")
+    else (() => {
+            navigation.goBack()
+            saveStoreData(inputNameValue, inputDescriptionValue, chunks, id)
+            dispatch(refreshActionCreator())
+          })();
+  };
+
+  
   return (
     <>
       <Container>
@@ -87,12 +98,7 @@ function CreatePurposePage({navigation}) {
 
       <Button 
         title={'Create purpose'}
-        onPress={() => {
-            navigation.goBack()
-            saveStoreData(key, inputNameValue, inputDescriptionValue, state.chunks, id)
-            dispatch(refreshActionCreator())
-          }          
-        }  
+        onPress={()=>chunkChecker()}
       />
     </>
   )

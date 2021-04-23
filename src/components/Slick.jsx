@@ -14,7 +14,7 @@ export default function SlickSlider() {
   const [pageIndex, setPageIndex] = useState(false);
   const [allPurposes, setAllPurposes] = useState([]);
   const [selectPurpose, setSelectPurpose] = useState({});
-console.log(selectPurpose)
+  // console.log(allPurposes)
 
   const getDataKeys = () => AsyncStorage.getAllKeys()
     .then(elem => elem.map(elem => getStoreData(elem)
@@ -28,7 +28,7 @@ console.log(selectPurpose)
       getDataKeys()
     },[refresh])
 
-  const changePageIndex = (elId) => setSelectPurpose((selectPurpose)=> {
+  const choosePurpose = (elId) => setSelectPurpose((selectPurpose)=> {
    selectPurpose = allPurposes.filter(obj => obj.id === elId)
    return selectPurpose[0]
   })
@@ -37,13 +37,12 @@ console.log(selectPurpose)
   // const changePageIndex = () => setPageIndex(pageIndex => pageIndex = !pageIndex)
   // const gotoPrev = () => {
   //   // slickPrev()
-  //   console.log()
   // }
   
   return (
     <Slider showsPagination={false} slickGoTo={pageIndex === false ? 0 : 1} loop={false} index={0}>
       <PageTwo allPurposes={allPurposes} selectPurpose={selectPurpose}/>
-      <PageOne changePageIndex={changePageIndex} allPurposes={allPurposes}/>
+      <PageOne  choosePurpose={choosePurpose} allPurposes={allPurposes}/>
     </Slider>
    )
 };

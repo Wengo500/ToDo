@@ -7,7 +7,7 @@ import TaskCard from './TaskCard';
 import CreateNewTask from './CreateNewTask';
 
 
-function PageTwo({changePageIndex, allPurposes}) {
+function PageTwo({choosePurpose, allPurposes}) {
   const {navigate} = useNavigation();
   return (
     <PageTwoEl>          
@@ -15,7 +15,7 @@ function PageTwo({changePageIndex, allPurposes}) {
       <Container>   
 
         {allPurposes.map(el=> 
-          <TouchableOpacity key={el.id} onPress={()=> changePageIndex(el.id)}>
+          <TouchableOpacity key={el.id} onPress={()=> choosePurpose(el.id)}>
             <TaskCard purposeName={el.purposeName}/>
           </TouchableOpacity>
           )

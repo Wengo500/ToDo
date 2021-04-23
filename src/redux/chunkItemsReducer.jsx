@@ -5,14 +5,15 @@ let initialState = []
 let chunkItemsReducer = (state=initialState, action) => {
   switch(action.type) {
     case CREATE_CHUNK_ITEMS_ARR:
-      return [      
+      return [
         ...state.filter((el)=> el.chunkId !== action.chunkId),
+
         { 
           chunkId: action.chunkId,
           chunkName: action.chunkName, 
           chunkDescription: action.chunkDescription,
           chunkStartDate: action.chunkStartDate,
-        }
+        },
       ]                      
     default: return state;
   }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import styled from 'styled-components/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import DateSelect from '../../DateSelect';
 
@@ -10,18 +10,19 @@ import {CreateChunkItemsArrActionCreator} from '../../../redux/chunkItemsReducer
 
 function PurposeChunk({id}) {
   const dispatch = useDispatch()
-  const date = useSelector(state=> state.startDate.date)
+  const [chunkDate, setChunkDate] = useState('');
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputDescriptionValue, setInputDescriptionValue] = useState('')
+  const newDate = (currentDate) => setChunkDate(()=> currentDate)
 
   useEffect(()=>{
-    dispatch(CreateChunkItemsArrActionCreator(id, inputNameValue, inputDescriptionValue, date))
-  },[inputNameValue, inputDescriptionValue])
+    dispatch(CreateChunkItemsArrActionCreator(id, inputNameValue, inputDescriptionValue, chunkDate))
+  },[inputNameValue, inputDescriptionValue, chunkDate])
 
   return (
     <Container>
 
-      <DateSelect/>
+      <DateSelect newDate={newDate}/>
 
       <TextInput 
         style={[styles.purposeInput]} 
@@ -58,14 +59,7 @@ background-color: rgba(50, 90, 250, .2);
 border-radius: 20px;
 align-items: center;
 `;
-const DeleteChunkBtn = styled.Text`
-padding: 5px 10px;
-width: 70px;
-border-radius: 20px;
-background-color: rgba(200, 100, 100, 1);
-color: white;
-text-align: center;
-`;
+
 const styles = StyleSheet.create({
   purposeInput: {
     width: '100%',
