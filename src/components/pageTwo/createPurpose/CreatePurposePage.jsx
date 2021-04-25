@@ -1,4 +1,4 @@
-import React, { useState, useEffect}  from 'react';
+import React, { useState }  from 'react';
 import { StyleSheet, Button, TextInput, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ function CreatePurposePage({navigation}) {
   const [inputDescriptionValue, setInputDescriptionValue] = useState('')
   const [chunkComponentArr, setChunkComponentArr] = useState([])
   const id = Math.random()
-
+ 
 
   const getNewChunk = () => setChunkComponentArr(oldArr => [...oldArr, <PurposeChunk/>])
 
@@ -51,11 +51,12 @@ function CreatePurposePage({navigation}) {
         el => el.chunkStartDate === "" || 
         el.chunkName === "" || 
         el.chunkDescription === "")) alert("Empty input or date")
-    else (() => {
+    else 
+    (() => {
             navigation.goBack()
             saveStoreData(inputNameValue, inputDescriptionValue, chunks, id)
             dispatch(refreshActionCreator())
-          })();
+          })()
   };
 
   
