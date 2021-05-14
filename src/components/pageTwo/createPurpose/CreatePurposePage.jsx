@@ -6,20 +6,18 @@ import styled from 'styled-components/native';
 import { useConfirm } from 'react-native-confirm-dialog';
 
 import PurposeChunk from './PurposeChunk';
-import {saveStoreData} from '../../../asyncStorage/storeData';
+import {saveAsyncData} from '../../../asyncStorage/storeData';
 import {refreshActionCreator} from '../../../redux/refreshReducer';
 
 
 function CreatePurposePage({navigation}) {
-  const chunks = useSelector(state=> state.chunks)
-  const dispatch = useDispatch()
-  const confirm = useConfirm()
-  const [inputNameValue, setInputNameValue] = useState('')
-  const [inputDescriptionValue, setInputDescriptionValue] = useState('')
-  const [chunkComponentArr, setChunkComponentArr] = useState([])
+  const chunks = useSelector(state=> state.chunks);
+  const dispatch = useDispatch();
+  const confirm = useConfirm();
+  const [inputNameValue, setInputNameValue] = useState('');
+  const [inputDescriptionValue, setInputDescriptionValue] = useState('');
+  const [chunkComponentArr, setChunkComponentArr] = useState([]);
   const id = Math.random()
- 
-
   const getNewChunk = () => setChunkComponentArr(oldArr => [...oldArr, <PurposeChunk/>])
 
   const handlePress = (id) => confirm({
@@ -48,15 +46,15 @@ function CreatePurposePage({navigation}) {
   const chunkChecker =()=>{
     if(chunkComponentArr.length < 3) alert('Сreate at least 3 chunks')
     else if(chunks.some(
-        el => el.chunkStartDate === "" || 
-        el.chunkName === "" || 
-        el.chunkDescription === "")) alert("Empty input or date")
+      el => el.chunkStartDate === "" || 
+      el.chunkName === "" || 
+      el.chunkDescription === "")) alert("Empty input or date")
     else 
     (() => {
-            navigation.goBack()
-            saveStoreData(inputNameValue, inputDescriptionValue, chunks, id)
-            dispatch(refreshActionCreator())
-          })()
+        navigation.goBack()
+        saveAsyncData(inputNameValue, inputDescriptionValue, chunks, id)
+        // dispatch(refreshActionCreator())
+      })()
   };
 
   

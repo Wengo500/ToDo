@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
 
 import HeaderComponent from './header/Header';
 import TaskListComponent from './taskList/TaskList';
 
 export default function PageOne({selectPurpose, allPurposes}) {
+  
   return (
       <PageOneEl>
         {allPurposes.length === 0 ?

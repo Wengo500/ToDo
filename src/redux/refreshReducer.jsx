@@ -1,15 +1,22 @@
-const REFRESH = 'REFRESH';
+const RENDER = 'RENDER';
+const RELOAD = 'RELOAD';
 
 
-let refreshReducer = (state=false, action) => {
+const initialState = []
+
+let refreshReducer = (state=initialState, action) => {
   switch(action.type) {
-    case REFRESH:
-    return state = !state
+    case RENDER:
+    return action.payload
+
+    case RELOAD:
+    return action.payload
                         
     default: return state;
   }
 }
 
-export const refreshActionCreator =()=> ({type: REFRESH})
+export const renderActionCreator = (purposes)=> ({type: RENDER, payload: purposes})
+export const reloadActionCreator = (purposes)=> ({type: RELOAD, payload: purposes})
 
 export default refreshReducer;
